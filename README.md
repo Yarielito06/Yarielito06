@@ -52,10 +52,6 @@
 <img src="https://streak-stats.demolab.com?user=Yarielito06&theme=tokyonight&hide_border=true&background=0D1117&ring=A78BFA&fire=06B6D4&currStreakLabel=A78BFA" alt="GitHub streak" />
 </p>
 
-<p align="center">
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Yarielito06&bg_color=0D1117&color=A78BFA&line=6D28D9&point=06B6D4&area=true&hide_border=true" alt="activity graph" width="100%" />
-</p>
-
 ---
 
 <p align="center">
