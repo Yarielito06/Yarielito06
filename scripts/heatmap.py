@@ -27,7 +27,6 @@ GLYPHS = {
  "8": "01110 10001 10001 01110 10001 10001 01110", "9": "01110 10001 10001 01111 00001 00010 01100",
  ",": "00000 00000 00000 00000 00110 00100 01000", " ": "00000 00000 00000 00000 00000 00000 00000",
 }
-GLYPHS["K"] = "10001 10010 10100 11000 10100 10010 10001"
 MONTHS = ("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
 # five levels, from nothing to NoVas green
 LEVELS = ("#15181a", "#0d4a2a", "#0a7a3c", "#14c25c", "#18ff6e")
@@ -67,24 +66,6 @@ def main(src, dst):
     out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" shape-rendering="crispEdges">' % (W, H, W, H),
            '<rect width="%d" height="%d" fill="#000"/>' % (W, H)]
     text_rects("%s CONTRIBUTIONS" % format(cal["totalContributions"], ","), pad, 14, 3, WHITE, out)
-    # consecutive days with at least one contribution (a quiet "today" does not break it yet)
-    counts = [d["contributionCount"] for w in weeks for d in w["contributionDays"]]
-    best = run = 0
-    for n in counts:
-        run = run + 1 if n > 0 else 0
-        best = max(best, run)
-    i = len(counts) - 1
-    if i >= 0 and counts[i] == 0:
-        i -= 1
-    streak = 0
-    while i >= 0 and counts[i] > 0:
-        streak += 1
-        i -= 1
-    s_label = "%d DAY STREAK" % streak
-    b_label = "BEST %d" % best
-    s_x = W - pad - (len(s_label) * 18 - 3)
-    text_rects(s_label, s_x, 14, 3, LEVELS[4], out)
-    text_rects(b_label, s_x - 24 - (len(b_label) * 12 - 2), 19, 2, GREY, out)
     seen = -1
     last_label = -9
     for wi, w in enumerate(weeks):
