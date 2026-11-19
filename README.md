@@ -10,6 +10,12 @@ Building **[NoVas](https://github.com/Yarielito06/NoVas)**, a keychain pocket fr
 
 &nbsp;
 
+<p align="center">
+  <img src="heatmap.svg" alt="My last year of contributions, drawn in pixels" width="800">
+</p>
+
+&nbsp;
+
 ### things
 
 - **[NoVas](https://github.com/Yarielito06/NoVas)** · a pocket friend with a face · MicroPython, ESP32-S3, 3D printing

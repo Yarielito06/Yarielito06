@@ -1,0 +1,30 @@
+name: pixel heatmap
+
+# Redraws heatmap.svg (your contributions, in pixel blocks) once a day. You can also run it by hand from the Actions tab.
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch contributions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api graphql -f query="$(cat scripts/query.graphql)" -f login="${{ github.repository_owner }}" > calendar.json
+      - name: Draw the heatmap
+        run: python3 scripts/heatmap.py calendar.json heatmap.svg
+      - name: Save it
+        run: |
+          rm -f calendar.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add heatmap.svg
+          git diff --cached --quiet || git commit -m "Redraw pixel heatmap"
+          git push
